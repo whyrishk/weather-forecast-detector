@@ -111,11 +111,15 @@ app.get('/api/weather', async (req, res) => {
         lat: Number(lat.toFixed(4)),
         lon: Number(lon.toFixed(4))
       },
-      current: {
-        temp: Math.round(current.main.temp),
-        feels_like: Math.round(current.main.feels_like),
-        humidity: current.main.humidity,
-        pressure: current.main.pressure,
+     current: {
+  temp: Math.round(current.main.temp),
+  temp_max: Math.round(current.main.temp_max),
+  temp_min: Math.round(current.main.temp_min),
+  feels_like: Math.round(current.main.feels_like),
+  humidity: current.main.humidity,
+  pressure: current.main.pressure,
+  clouds: current.clouds?.all ?? 0,
+  dt: current.dt,
         visibility: (current.visibility / 1000).toFixed(1),
         wind_speed: current.wind.speed,
         wind_deg: current.wind.deg,

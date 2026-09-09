@@ -100,21 +100,33 @@ function renderAll() {
 }
 
 /* ── HERO ────────────────────────────────────────────────────────────────── */
+/* ── HERO ────────────────────────────────────────────────────────────────── */
 function renderHero() {
   const { location: loc, current: c } = state.data;
-  $('heroCity').textContent = `${loc.name}`;
+
+  $('heroCity').textContent = loc.name;
   $('heroCountry').textContent = loc.country;
+
   $('heroTemp').textContent = disp(c.temp);
   $('heroDesc').textContent = c.description;
-  $('heroHigh').textContent = disp(c.temp_max);
-  $('heroLow').textContent  = disp(c.temp_min);
+
+  $('heroHigh').textContent = disp(c.temp_max ?? c.temp);
+  $('heroLow').textContent = disp(c.temp_min ?? c.temp);
+
   $('heroFeels').textContent = disp(c.feels_like);
+
   $('heroIcon').src = iconUrl(c.icon);
   $('heroIcon').alt = c.description;
-  $('sunrise').textContent = fmtTime(c.sunrise, loc.timezone_offset);
-  $('sunset').textContent  = fmtTime(c.sunset,  loc.timezone_offset);
-  $('lastUpdated').textContent = `Updated: ${new Date(c.dt * 1000).toLocaleTimeString()}`;
+
+  $('sunrise').textContent = fmtTime(c.sunrise);
+  $('sunset').textContent = fmtTime(c.sunset);
+
+  $('lastUpdated').textContent =
+    c.dt
+      ? `Updated: ${new Date(c.dt * 1000).toLocaleTimeString()}`
+      : 'Updated: --';
 }
+
 
 /* ── STATS ───────────────────────────────────────────────────────────────── */
 function renderStats() {
